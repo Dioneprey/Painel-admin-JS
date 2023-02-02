@@ -5,7 +5,20 @@ import User from '../models/user'
 export default {
     resource: User,
     options: {
-        
+        parent: {
+            icon: 'User'
+        },
+        actions: {
+            resetPassword: {
+                actionType: 'record',
+                icon: 'Password',
+                handler: async (request, response, context) => {
+                    return {
+                        record: context.record.toJSON()
+                    }
+                }
+            }
+        },
         properties: {
             id: {
                 position: 1,
@@ -39,13 +52,13 @@ export default {
                     { value: 'archived', label: 'Arquivado'}                    
                 ]
             },
-            created_at: {
+            createdAt: {
                 position: 7,
-                isVisible: { list: false, filter: true, show: false, edit: false }
+                isVisible: { list: true, filter: true, show: true, edit: false }
             },
-            updated_at: {
+            updatedAt: {
                 position: 8,
-                isVisible: { list: false, filter: true, show: false, edit: false }
+                isVisible: { list: true, filter: true, show: true, edit: false }
             },            
             password: {
                 isVisible: false
